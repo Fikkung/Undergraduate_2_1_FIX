@@ -1,0 +1,33 @@
+version: '3.8'
+services:
+  WORDPRESS:
+    image: wordpress:latest
+    container_name: wordpress_6649010018
+    ports:
+      - "8418:80"
+    environment:
+      WORDPRESS_DB_HOST: MYSQL
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_DB_NAME: wordpress
+    volumes:
+      - wordpress_data:/var/www/html
+    depends_on:
+      - MYSQL
+
+  MYSQL:
+    image: mysql:5.7
+    container_name: wordpress__6649010018
+    restart: always
+    ports:
+      - 3418:3306
+    environment:
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress
+      MYSQL_ROOT_PASSWORD: root_password
+    volumes:
+      - db_data:/var/lib/mysql
+volumes:
+  wordpress_data:
+  db_data:
